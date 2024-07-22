@@ -1,4 +1,3 @@
-
 if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", ready);
 } else {
@@ -53,9 +52,11 @@ function quantityChanged(event) {
     var cartBox = input.closest('.cart_box');
     var id = cartBox.dataset.id;
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
+
     for (var i = 0; i < cartItems.length; i++) {
         if (cartItems[i].id === id) {
-            cartItems[i].quantity = input.value;
+            console.log("Updating quantity for ID:", id); // Debugging statement
+            cartItems[i].quantity = parseInt(input.value, 10); // Ensure it's an integer
             break;
         }
     }
@@ -117,14 +118,16 @@ function renderCartItems(cartItems) {
         var cartBoxContent = `                                
             <div class="cart_box_sub">
                 <img src="${cartItem.productImg}" alt="" class="cart_img" onerror="this.src='default-image-url.png';">
+                <div class="cart_box_subsize">
                 <div class="cart_product_title">${cartItem.title}</div>
-                                <div class="cart_box_subsize_sub">
-                           <input type="number" name="" id="" value="${cartItem.quantity}" class="class_quantity" />
-                <div class="cart_price">${cartItem.price}</div>
+                <div class="cart_box_subsize_sub">
+                    <input type="number" value="${cartItem.quantity}" class="class_quantity" />
+                    <div class="cart_price">${cartItem.price}</div>
+                </div>
                 </div>
             </div>
             <div class="details_box">
-                <input type="number" name="" id="" value="${cartItem.quantity}" class="class_quantity" />
+                <input type="number" value="${cartItem.quantity}" class="class_quantity" />
                 <div class="cart_price">${cartItem.price}</div>
             </div>
             <i class='bx bx-trash Cart-remove'></i>`;
@@ -143,11 +146,27 @@ function updateTotal() {
         var cartBox = cartBoxes[i];
         var priceElement = cartBox.getElementsByClassName("cart_price")[0];
         var quantityElement = cartBox.getElementsByClassName("class_quantity")[0];
-        var price = parseFloat(priceElement.innerHTML.replace("$", ""));
-        var quantity = quantityElement.value;
+        
+        // Debugging statements
+        console.log("Cart Box:", i + 1);
+        console.log("Price Element HTML:", priceElement.innerHTML);
+        console.log("Quantity Element Value:", quantityElement.value);
+
+        // Clean price data
+        var priceText = priceElement.innerHTML.replace(/[^0-9.]/g, ''); // Remove non-numeric characters
+        var price = parseFloat(priceText);
+        var quantity = parseInt(quantityElement.value, 10);
+
+        console.log("Cleaned Price:", price);
+        console.log("Quantity:", quantity);
+
         total += price * quantity;
     }
+
     total = Math.round(total * 100) / 100;
+
+    console.log("Total Price:", total);
+
     if (document.getElementsByClassName("total_price")[0]) {
         document.getElementsByClassName("total_price")[0].innerHTML = "$" + total;
     }
@@ -156,16 +175,9 @@ function updateTotal() {
     }
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    renderCartItems(cartItems);
-    updateTotal();
-    updateCartIcon();
-});
-
 function updateCartIcon() {
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
-    var totalQuantity = cartItems.reduce((acc, item) => acc + parseInt(item.quantity), 0);
+    var totalQuantity = cartItems.reduce((acc, item) => acc + parseInt(item.quantity, 10), 0); // Ensure it's an integer
 
     var cartIcon = document.querySelector("#Cart_icon");
     if (cartIcon) {
@@ -175,6 +187,7 @@ function updateCartIcon() {
     }
 }
 
+
 // Function to clear cart items from local storage (for testing purposes)
 function clearCart() {
     localStorage.removeItem("cartItems");
@@ -182,6 +195,3 @@ function clearCart() {
     updateTotal();
     updateCartIcon();
 }
-
-// Add this line to call clearCart (for testing purposes)
-clearCart();
