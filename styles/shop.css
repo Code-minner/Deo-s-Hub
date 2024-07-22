@@ -159,7 +159,7 @@ body {
 }
 
 .custom-shape-divider-bottom-1720552944 .shape-fill {
-    fill: #FFFFFF;
+    fill: var(--primary_color);
 }
 
 .header_pro {
@@ -988,6 +988,11 @@ footer {
 
 
 @media (max-width: 900px) {
+
+    .section_two_sub{
+        padding: 3rem 2%;
+    }
+
     .section_two_sub_container {
         width: 100%;
         display: grid;
@@ -1011,6 +1016,10 @@ footer {
 
     .header h2 {
         font-size: 1.8em;
+    }
+
+    .card_img {
+        height: 30vh;
     }
 }
 

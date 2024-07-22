@@ -159,7 +159,7 @@ body {
 }
 
 .custom-shape-divider-bottom-1720552944 .shape-fill {
-    fill: #FFFFFF;
+    fill: var(--primary_color);
 }
 
 .header_pro {

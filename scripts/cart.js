@@ -43,17 +43,19 @@ function removeCartItem(event) {
     updateCartIcon();
 }
 
+// Handle quantity change
 function quantityChanged(event) {
     var input = event.target;
     if (isNaN(input.value) || input.value <= 0) {
         input.value = 1;
     }
 
+    // Update localStorage
     var cartBox = input.closest('.cart_box');
-    var id = cartBox.dataset.id;
+    var title = cartBox.getElementsByClassName("cart_product_title")[0].innerText;
     var cartItems = JSON.parse(localStorage.getItem("cartItems")) || [];
     for (var i = 0; i < cartItems.length; i++) {
-        if (cartItems[i].id === id) {
+        if (cartItems[i].title === title) {
             cartItems[i].quantity = input.value;
             break;
         }
@@ -63,6 +65,7 @@ function quantityChanged(event) {
     updateTotal();
     updateCartIcon();
 }
+
 
 function addCartClicked(event) {
     var button = event.target;
@@ -114,14 +117,14 @@ function renderCartItems(cartItems) {
         cartShopBox.classList.add("cart_box");
         cartShopBox.dataset.id = cartItem.id;
         var cartBoxContent = `                                
-             <div class="cart_box_sub">
+            <div class="cart_box_sub">
                 <img src="${cartItem.productImg}" alt="" class="cart_img">
                 <div class="cart_box_subsize">
-                <div class="cart_product_title">${cartItem.title}</div>
-                <div class="cart_box_subsize_sub">
-                           <input type="number" name="" id="" value="${cartItem.quantity}" class="class_quantity" />
-                <div class="cart_price">${cartItem.price}</div>
-                </div>
+                    <div class="cart_product_title">${cartItem.title}</div>
+                    <div class="cart_box_subsize_sub">
+                        <input type="number" name="" id="" value="${cartItem.quantity}" class="class_quantity" />
+                        <div class="cart_price">${cartItem.price}</div>
+                    </div>
                 </div>
             </div>
             <div class="details_box details_boxsize">
@@ -136,6 +139,7 @@ function renderCartItems(cartItems) {
         cartShopBox.getElementsByClassName("class_quantity")[0].addEventListener('change', quantityChanged);
     });
 }
+
 
 function updateTotal() {
     var cartBoxes = document.getElementsByClassName("cart_box");

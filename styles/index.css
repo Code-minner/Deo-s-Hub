@@ -1686,7 +1686,7 @@ footer {
     }
 
     .nav_bar.navigation {
-        height: 80vh;
+        height: 70vh;
     }
 
     .nav_bar.navigation.expand {
@@ -1882,6 +1882,10 @@ footer {
     }
 
 
+    .card_img {
+        height: 30vh;
+    }
+
 
     /*-------header_section for others */
     .section_two_sub_header h2 {
@@ -2007,6 +2011,18 @@ footer {
 
 
 
+}
+
+@media (max-width: 650px) {
+    .foot_sub_container_sub_text p {
+        font-size: .9em;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .link_footer ul li a {
+        font-size: .7em;
+    }
 }
 
 @media (max-width: 400px) {

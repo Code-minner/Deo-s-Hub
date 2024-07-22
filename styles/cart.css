@@ -463,4 +463,8 @@ form .content_two_sub_container_link {
         width: 100px;
       height: 100px;
 }
+
+.cart_header {
+    display: none;
+}
 }
