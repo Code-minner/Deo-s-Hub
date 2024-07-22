@@ -1,0 +1,13 @@
+.section_one_sub {
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    background: linear-gradient(rgba(0, 0, 0, 0.09), rgba(0, 0, 0, 0.09)), url(https://fimgs.net/mdimg/vijesti/o.17378.2.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+
+}
