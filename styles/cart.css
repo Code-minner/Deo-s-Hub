@@ -105,15 +105,15 @@ header {
 
 
 .cart_header {
-width: 100%;
+    width: 100%;
     font-size: 1.7em;
 }
 
 .link {
     position: relative;
     display: block;
-width: 100%;
-margin-top: 3rem;
+    width: 100%;
+    margin-top: 3rem;
 }
 
 .content_three_sub_container_link_img {
@@ -443,6 +443,7 @@ form .content_two_sub_container_link {
         width: 100px;
         height: 100px;
     }
+
     .cart_content_container_sub_head_subber {
         display: none;
     }
@@ -461,10 +462,14 @@ form .content_two_sub_container_link {
 
     .cart_img {
         width: 100px;
-      height: 100px;
-}
+        height: 100px;
+    }
 
-.cart_header {
-    display: none;
-}
+    header {
+        grid-template-columns: 50% 50%;
+    }
+
+    .cart_header {
+        display: none;
+    }
 }
